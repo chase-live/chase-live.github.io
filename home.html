@@ -1,0 +1,71 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Y2KBZ.live</title>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0; background-color: black; color: white;
+    font-family: 'Shrikhand', cursive;
+    height: 100vh; display: flex; align-items: flex-start;
+    user-select: none;
+  }
+  h1 {
+    position: fixed; top: 0; left: 0; right: 0;
+    text-align: center; font-size: 3em; margin: 20px 0;
+    background-color: black; z-index: 10;
+  }
+  nav {
+    display: flex; flex-direction: column;
+    padding-top: 100px; gap: 20px; margin-left: 20px;
+    min-width: 180px;
+  }
+  button {
+    background-color: white; color: black; border: none;
+    padding: 15px; font-size: 1.1em; border-radius: 5px;
+    cursor: pointer; font-family: 'Shrikhand', cursive;
+    transition: background-color 0.3s ease; text-align: left;
+    width: 180px;
+  }
+  button:hover {
+    background-color: #ddd;
+  }
+  button.red {
+    background-color: #cc0000; color: white;
+  }
+  button.red:hover {
+    background-color: #ff0000;
+  }
+</style>
+</head>
+<body>
+  <h1>Y2KBZ.live</h1>
+  <nav>
+    <button id="btnCheats">Cheats.md</button>
+    <button id="btnPE">proxies-exploits.md</button>
+    <button id="btnAIProxy">aiproxy</button>
+    <button id="btnRecallexper" class="red">recallexper.jlo</button>
+  </nav>
+
+<script>
+  document.getElementById('btnCheats').addEventListener('click', () => {
+    window.location.href = 'cheats.html';
+  });
+
+  document.getElementById('btnPE').addEventListener('click', () => {
+    window.location.href = 'pe.html';
+  });
+
+  document.getElementById('btnAIProxy').addEventListener('click', () => {
+    window.open('https://www.google.com/search?udm=50&aep=46&source=25q2-US-SearchSites-Site-CTA', '_blank', 'noopener');
+  });
+
+  document.getElementById('btnRecallexper').addEventListener('click', () => {
+    window.location.href = 'danger.html';
+  });
+</script>
+</body>
+</html>
